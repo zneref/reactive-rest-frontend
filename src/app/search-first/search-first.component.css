@@ -1,8 +1,7 @@
 /* MovieDetailComponent's private CSS styles */
 img {
   float: left;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  max-width: 200px;
 }
 .center {
     margin: auto;
@@ -76,9 +75,6 @@ only screen and (max-width: 760px),
 	  	width: 100%;
 	}
 
-  img {
-    min-width: 320px;
-  }
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr {
 		display: block;
