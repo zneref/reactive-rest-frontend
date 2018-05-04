@@ -1,13 +1,14 @@
 /* DashboardComponent's private CSS styles */
 .center {
-  text-align: center;
-  margin: 20px;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
 
 [class*='col-'] {
   float: left;
-  padding-right: 20px;
-  padding-bottom: 20px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 [class*='col-']:last-of-type {
   padding-right: 0;
@@ -33,12 +34,12 @@ h4 {
   width: 25%;
 }
 .module {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   color: #eee;
   max-height: 120px;
   min-width: 120px;
-  background-color: #607D8B;
+  background-color: #339966;
   border-radius: 2px;
 }
 .module:hover {

@@ -1,36 +1,33 @@
 <div *ngIf="movie" class="center">
   <h2>{{ movie.title | uppercase }}</h2>
+  <img src={{movie.info.image_url}} alt="img" />
   <table>
     <tr>
-      <td rowspan="10"><img src={{movie.info.image_url}} alt="img" /></td>
+        <td><span class="bold">Title: </span>{{movie.title}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Title </span></td><td>{{movie.title}}</td>
+        <td><span class="bold">Directors: </span>{{movie.info.directors}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Directors </span></td><td>{{movie.info.directors}}</td>
+        <td><span class="bold">Release date: </span>{{movie.info.release_date}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Release date </span></td><td>{{movie.info.release_date}}</td>
+      <td><span class="bold">Rating: </span>{{movie.info.rating}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Rating </span></td><td>{{movie.info.rating}}</td>
+      <td><span class="bold">Genres: </span>{{movie.info.genres}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Genres </span></td><td>{{movie.info.genres}}</td>
+      <td><span class="bold">Plot: </span>{{movie.info.plot}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Plot </span></td><td>{{movie.info.plot}}</td>
+      <td><span class="bold">Rank: </span>{{movie.info.rank}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Rank </span></td><td>{{movie.info.rank}}</td>
+      <td><span class="bold">Duration [sec]: </span>{{movie.info.running_time_secs}}</td>
     </tr>
     <tr>
-      <td><span class="bold">Duration [sec] </span></td><td>{{movie.info.running_time_secs}}</td>
-    </tr>
-    <tr>
-      <td><span class="bold">Actors </span></td><td>{{movie.info.actors}}</td>
+      <td><span class="bold">Actors: </span>{{movie.info.actors}}</td>
     </tr>
   </table>
-  <button (click)="goBack()">go back</button>
 </div>

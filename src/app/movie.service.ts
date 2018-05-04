@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,55 +16,50 @@ const httpOptions = {
 @Injectable()
 export class MovieService {
 
-  private movies: Movie[];
-//  private moviesUrl = 'http://localhost:8080/v1/movies';  // URL to web api
-  private moviesUrl = 'https://webflux-rest-app.herokuapp.com/v1/movies';  // URL to rest api deployed on heroku
+  private movies: Movie[] = [];
+  private zone = new NgZone({ enableLongStackTrace: false });
+
+  private moviesUrl = 'https://webflux-rest-app.herokuapp.com/v1/movies';
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) { }
 
-/*  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl, httpOptions)
-      .pipe(
-        tap(movies => this.log(`fetched movies`)),
-        catchError(this.handleError('getMovies', []))
-      );
-  }
-*/
   getMovies(): Observable<Movie[]> {
     this.movies = [];
     return Observable.create((observer) => {
        let url = this.moviesUrl;
        let eventSource = new EventSource(url, httpOptions);
-       eventSource.onmessage = (event) => {
+       eventSource.onmessage = (event) => this.zone.run(() => {
          console.debug('Received event: ', event);
          let json = JSON.parse(event.data);
          this.movies.push(new Movie(json['id'], json['title'], json['info']));
          observer.next(this.movies);
-       };
-       eventSource.onerror = (error) => observer.error('EventSource error: ' + error);
+       });
+       eventSource.onerror = (error) => this.zone.run(
+         () =>observer.error('EventSource error: ' + error));
+       return () => eventSource.close();
      });
   }
 
-  /* GET movies whose title contains search term */
   searchMovies(query: string): Observable<Movie[]> {
     this.movies = [];
     return Observable.create((observer) => {
        let url = `${this.moviesUrl}/all?q=${query}`;
        let eventSource = new EventSource(url, httpOptions);
-       eventSource.onmessage = (event) => {
+       eventSource.onmessage = (event) => this.zone.run(() => {
          console.debug('Received event: ', event);
          let json = JSON.parse(event.data);
          this.movies.push(new Movie(json['id'], json['title'], json['info']));
          observer.next(this.movies);
-       };
-       eventSource.onerror = (error) => observer.error('EventSource error: ' + error);
+       });
+      eventSource.onerror = (error) => this.zone.run(
+         () => observer.error('EventSource error: ' + error));
+      return () => eventSource.close();
      });
   }
-  
-  /* GET first movie which title contains search term */
+
   searchFirstMovie(query: string): Observable<Movie> {
     const url = `${this.moviesUrl}/first?q=${query}`;
     return this.http.get<Movie>(url).pipe(
@@ -73,7 +68,6 @@ export class MovieService {
     );
   }
 
-  /** GET movie by id. Will 404 if id not found */
   getMovie(id: string): Observable<Movie> {
     const url = `${this.moviesUrl}/${id}`;
     return this.http.get<Movie>(url).pipe(
@@ -85,6 +79,7 @@ export class MovieService {
   private log(message: string) {
   this.messageService.add('MovieService: ' + message);
   }
+  
   /**
    * Handle Http operation that failed.
    * Let the app continue.

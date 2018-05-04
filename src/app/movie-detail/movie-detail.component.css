@@ -1,8 +1,14 @@
 /* MovieDetailComponent's private CSS styles */
+img {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  min-width: 320px;
+}
 .center {
     margin: auto;
-    width: 60%;
-    padding: 30px;
+    width: 70%;
+    padding: 10px;
 }
 .bold {
   font-weight: bold;
@@ -41,7 +47,7 @@ button:disabled {
 table {
 	width: auto;
 	border-collapse: collapse;
-	margin:50px auto;
+	margin:10px auto;
 	}
 
 /* Zebra striping */
@@ -56,10 +62,10 @@ th {
 	}
 
 td, th {
-	padding: 10px;
+	padding: 5px;
 	border: 1px solid #ccc;
 	text-align: left;
-	font-size: 18px;
+	font-size: 14px;
 	}
 
 /*
@@ -74,7 +80,6 @@ only screen and (max-width: 760px),
 	table {
 	  	width: 100%;
 	}
-
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr {
 		display: block;
@@ -94,7 +99,6 @@ only screen and (max-width: 760px),
 		border: none;
 		border-bottom: 1px solid #eee;
 		position: relative;
-		padding-left: 50%;
 	}
 
 	td:before {
