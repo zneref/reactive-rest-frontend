@@ -6,14 +6,17 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Movie } from './movie';
 import { MessageService } from './message.service';
+import * as EventSource from 'eventsource';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'text/event-stream' })
+//headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
 export class MovieService {
 
+  private movies: Movie[];
 //  private moviesUrl = 'http://localhost:8080/v1/movies';  // URL to web api
   private moviesUrl = 'https://webflux-rest-app.herokuapp.com/v1/movies';  // URL to rest api deployed on heroku
 
@@ -22,12 +25,52 @@ export class MovieService {
     private messageService: MessageService
   ) { }
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl)
+/*  getMovies(): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.moviesUrl, httpOptions)
       .pipe(
         tap(movies => this.log(`fetched movies`)),
         catchError(this.handleError('getMovies', []))
       );
+  }
+*/
+  getMovies(): Observable<Movie[]> {
+    this.movies = [];
+    return Observable.create((observer) => {
+       let url = this.moviesUrl;
+       let eventSource = new EventSource(url, httpOptions);
+       eventSource.onmessage = (event) => {
+         console.debug('Received event: ', event);
+         let json = JSON.parse(event.data);
+         this.movies.push(new Movie(json['id'], json['title'], json['info']));
+         observer.next(this.movies);
+       };
+       eventSource.onerror = (error) => observer.error('EventSource error: ' + error);
+     });
+  }
+
+  /* GET movies whose title contains search term */
+  searchMovies(query: string): Observable<Movie[]> {
+    this.movies = [];
+    return Observable.create((observer) => {
+       let url = `${this.moviesUrl}/all?q=${query}`;
+       let eventSource = new EventSource(url, httpOptions);
+       eventSource.onmessage = (event) => {
+         console.debug('Received event: ', event);
+         let json = JSON.parse(event.data);
+         this.movies.push(new Movie(json['id'], json['title'], json['info']));
+         observer.next(this.movies);
+       };
+       eventSource.onerror = (error) => observer.error('EventSource error: ' + error);
+     });
+  }
+  
+  /* GET first movie which title contains search term */
+  searchFirstMovie(query: string): Observable<Movie> {
+    const url = `${this.moviesUrl}/first?q=${query}`;
+    return this.http.get<Movie>(url).pipe(
+      tap(_ => this.log(`found movie matching "${query}"`)),
+      catchError(this.handleError<Movie>('searchFirstMovie'))
+    );
   }
 
   /** GET movie by id. Will 404 if id not found */
@@ -36,28 +79,6 @@ export class MovieService {
     return this.http.get<Movie>(url).pipe(
       tap(_ => this.log(`fetched movie id=${id}`)),
       catchError(this.handleError<Movie>(`getMovie id=${id}`))
-    );
-  }
-
-  /* GET movies whose title contains search term */
-  searchMovies(query: string): Observable<Movie[]> {
-    const url = `${this.moviesUrl}/all?q=${query}`;
-    if (!query.trim()) {
-      // if not search term, return empty array.
-      return of([]);
-    }
-    return this.http.get<Movie[]>(url).pipe(
-      tap(_ => this.log(`found movies matching "${query}"`)),
-      catchError(this.handleError<Movie[]>('searchMovies', []))
-    );
-  }
-
-  /* GET first movie which title contains search term */
-  searchFirstMovie(query: string): Observable<Movie> {
-    const url = `${this.moviesUrl}/first?q=${query}`;
-    return this.http.get<Movie>(url).pipe(
-      tap(_ => this.log(`found movie matching "${query}"`)),
-      catchError(this.handleError<Movie>('searchFirstMovie'))
     );
   }
 
