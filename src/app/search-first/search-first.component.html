@@ -1,5 +1,5 @@
 <div class="center">
-  <input #box (keyup.enter)="onEnter(box.value)">
+  <input #box (keyup.enter)="onEnter(box.value)" placeholder="Search first">
 </div>
 <div *ngIf="movie" class="center">
   <h2>{{ movie.title | uppercase }}</h2>

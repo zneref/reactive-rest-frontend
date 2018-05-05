@@ -10,7 +10,6 @@ import { MovieService } from './movie.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchAllComponent } from './search-all/search-all.component';
 import { SearchFirstComponent } from './search-first/search-first.component';
 
@@ -21,7 +20,6 @@ import { SearchFirstComponent } from './search-first/search-first.component';
     MoviesComponent,
     MovieDetailComponent,
     MessagesComponent,
-    DashboardComponent,
     SearchAllComponent,
     SearchFirstComponent
   ],

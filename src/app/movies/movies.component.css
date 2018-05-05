@@ -1,4 +1,28 @@
 /* DashboardComponent's private CSS styles */
+button.clear {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+  margin: 10px;
+  padding: 10px;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+button.clear {
+  color: #888;
+  margin-bottom: 12px;
+}
+
 [class*='col-'] {
   float: left;
   padding-right: 10px;

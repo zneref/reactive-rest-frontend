@@ -1,5 +1,5 @@
 <div class="center">
-  <input #box (keyup.enter)="onEnter(box.value)">
+  <input #box (keyup.enter)="onEnter(box.value)" placeholder="Search all">
 </div>
 <div class="grid grid-pad">
   <a *ngFor="let movie of movies" class="col-1-4"

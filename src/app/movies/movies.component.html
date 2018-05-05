@@ -1,3 +1,7 @@
+<div class="center">
+  <button class="clear"
+          (click)="getMovies()">Get them all! (long task)</button>
+</div>
 <div class="grid grid-pad">
   <a *ngFor="let movie of movies" class="col-1-4"
   routerLink="/detail/{{movie.id}}">

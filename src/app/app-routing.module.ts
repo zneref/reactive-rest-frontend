@@ -2,13 +2,12 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MoviesComponent }      from './movies/movies.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
 import { MovieDetailComponent }  from './movie-detail/movie-detail.component';
 import { SearchAllComponent }  from './search-all/search-all.component';
 import { SearchFirstComponent }  from './search-first/search-first.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/movies', pathMatch: 'full' },
+  { path: '', redirectTo: 'search-first', pathMatch: 'full' },
   { path: 'detail/:id', component: MovieDetailComponent },
   { path: 'movies', component: MoviesComponent },
   { path: 'search-all', component: SearchAllComponent },
