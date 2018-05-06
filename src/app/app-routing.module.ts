@@ -7,7 +7,7 @@ import { SearchAllComponent }  from './search-all/search-all.component';
 import { SearchFirstComponent }  from './search-first/search-first.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'search-first', pathMatch: 'full' },
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
   { path: 'detail/:id', component: MovieDetailComponent },
   { path: 'movies', component: MoviesComponent },
   { path: 'search-all', component: SearchAllComponent },
