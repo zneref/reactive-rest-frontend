@@ -5,6 +5,9 @@
   <h2>{{ movie.title | uppercase }}</h2>
   <table>
     <tr>
+      <td><img src="{{ movie.info.image_url }}" alt="movie image" /></td>
+    </tr>
+    <tr>
         <td><span class="bold">Title: </span>{{movie.title}}</td>
     </tr>
     <tr>

@@ -1,8 +1,18 @@
 /* MovieDetailComponent's private CSS styles */
 img {
-  float: left;
-  max-width: 200px;
+  padding: 5px;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
 }
+
+td img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 .center {
     margin: auto;
     width: 95%;
@@ -39,7 +49,7 @@ button:disabled {
 }
 
 table {
-	width: auto;
+	width: 50%;
 	border-collapse: collapse;
 	margin:10px auto;
 	}

@@ -1,9 +1,9 @@
 /* MovieDetailComponent's private CSS styles */
 img {
-  float: left;
-  padding-right: 10px;
-  padding-bottom: 10px;
+  padding: 5px;
+  width: 100%;
   max-width: 320px;
+  height: auto;
 }
 .center {
     margin: auto;
@@ -13,7 +13,12 @@ img {
 .bold {
   font-weight: bold;
 }
+td img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 
+}
 label {
   display: inline-block;
   width: 3em;
@@ -45,7 +50,7 @@ button:disabled {
 }
 
 table {
-	width: auto;
+	width: 50%;
 	border-collapse: collapse;
 	margin:10px auto;
 	}

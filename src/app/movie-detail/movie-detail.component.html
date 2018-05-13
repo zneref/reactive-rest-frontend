@@ -1,6 +1,9 @@
 <div *ngIf="movie" class="center">
+    <h2>{{ movie.title | uppercase }}</h2>
   <table>
-      <h2>{{ movie.title | uppercase }}</h2>
+    <tr>
+      <td><img src="{{ movie.info.image_url }}" alt="movie image" /></td>
+    </tr>
     <tr>
         <td><span class="bold">Title: </span>{{movie.title}}</td>
     </tr>
@@ -29,4 +32,5 @@
       <td><span class="bold">Actors: </span>{{movie.info.actors}}</td>
     </tr>
   </table>
+
 </div>

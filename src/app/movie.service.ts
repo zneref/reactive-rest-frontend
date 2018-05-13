@@ -79,7 +79,7 @@ export class MovieService {
   private log(message: string) {
   this.messageService.add('MovieService: ' + message);
   }
-  
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
