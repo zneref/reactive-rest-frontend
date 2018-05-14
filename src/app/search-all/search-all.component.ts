@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-search-all',
@@ -10,7 +11,7 @@ import { MovieService } from '../movie.service';
 export class SearchAllComponent implements OnInit {
   movies: Movie[] = [];
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
 //    this.getMovies();
@@ -18,8 +19,16 @@ export class SearchAllComponent implements OnInit {
 
   getMovies(query: string): void {
     this.movieService.searchMovies(query)
-      .subscribe(movies => this.movies = movies.slice());
+      .subscribe(movies => {
+        this.movies = movies.slice();
+        this.spinner.hide();
+      }, err => {
+        this.spinner.hide();
+      });
   }
 
-   onEnter(query: string) { this.getMovies(query); }
+   onEnter(query: string) {
+     this.spinner.show();
+     this.getMovies(query);
+    }
 }

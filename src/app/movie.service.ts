@@ -20,6 +20,7 @@ export class MovieService {
   private zone = new NgZone({ enableLongStackTrace: false });
 
   private moviesUrl = 'https://webflux-rest-app.herokuapp.com/v1/movies';
+  //private moviesUrl = 'http://localhost:8080/v2/movies';
 
   constructor(
     private http: HttpClient,

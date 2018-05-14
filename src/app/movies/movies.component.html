@@ -1,8 +1,10 @@
 <div class="center">
   <button class="clear"
-          (click)="getMovies()">Get all titles (long task)</button>
+          (click)="onClick()">Get all titles (long task)</button>
 </div>
 <div class="grid grid-pad">
+  <ngx-spinner
+  bdColor = "rgba(51, 51, 51, 0.8)" size = "large" color = "#fff" type = "ball-grid-beat"></ngx-spinner>
   <a *ngFor="let movie of movies" class="col-1-4"
   routerLink="/detail/{{movie.id}}">
     <div class="module movie">

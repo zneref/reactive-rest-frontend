@@ -24,6 +24,7 @@
     "core-js": "^2.4.1",
     "hoek": "^5.0.3",
     "ng-event-source": "^1.0.10",
+    "ngx-spinner": "^2.0.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

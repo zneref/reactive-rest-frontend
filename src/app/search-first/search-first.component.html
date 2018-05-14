@@ -1,6 +1,8 @@
 <div class="center">
   <input #box (keyup.enter)="onEnter(box.value)" placeholder="Search first">
 </div>
+<ngx-spinner
+bdColor = "rgba(51, 51, 51, 0.8)" size = "large" color = "#fff" type = "ball-grid-beat"></ngx-spinner>
 <div *ngIf="movie" class="center">
   <h2>{{ movie.title | uppercase }}</h2>
   <table>
