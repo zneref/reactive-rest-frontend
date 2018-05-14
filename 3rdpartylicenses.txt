@@ -433,6 +433,10 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 """
 
+@angular/common@5.2.10
+MIT
+MIT
+
 stream-http@2.8.1
 MIT
 The MIT License
@@ -591,6 +595,10 @@ isarray@1.0.0
 MIT
 MIT
 
+ngx-spinner@2.0.1
+MIT
+MIT
+
 ieee754@1.1.11
 BSD-3-Clause
 Copyright (c) 2008, Fair Oaks Labs, Inc.
@@ -652,10 +660,6 @@ MIT
 MIT
 
 @angular/forms@5.2.10
-MIT
-MIT
-
-@angular/common@5.2.10
 MIT
 MIT
 
